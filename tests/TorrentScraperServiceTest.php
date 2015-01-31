@@ -6,13 +6,10 @@ class TorrentScraperServiceTest extends \PHPUnit_Framework_TestCase
 {
     public function testIsSettingAndGettingTheAdapter()
     {
-        $adapterMock = $this->getMock('Xurumelous\TorrentScraper\AdapterInterface');
-        $service = new TorrentScraperService();
-
-        $service->setAdapter($adapterMock);
+        $service = new TorrentScraperService('null');
         $actual = $service->getAdapter();
 
-        $this->assertSame($adapterMock, $actual);
+        $this->assertInstanceOf('\Xurumelous\TorrentScraper\Adapter\NullAdapter', $actual);
     }
 
     public function testIsSearchingInTheAdapter()
@@ -21,7 +18,7 @@ class TorrentScraperServiceTest extends \PHPUnit_Framework_TestCase
         $adapterMock->expects($this->once())
             ->method('search');
 
-        $service = new TorrentScraperService();
+        $service = new TorrentScraperService('null');
         $service->setAdapter($adapterMock);
 
         $service->search('The Walking Dead S05E08');
@@ -34,7 +31,7 @@ class TorrentScraperServiceTest extends \PHPUnit_Framework_TestCase
             ->method('setHttpClient')
             ->with(new \GuzzleHttp\Client());
 
-        $service = new TorrentScraperService();
+        $service = new TorrentScraperService('null');
 
         $service->setAdapter($adapterMock);
     }

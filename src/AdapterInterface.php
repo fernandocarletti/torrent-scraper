@@ -5,6 +5,13 @@ namespace Xurumelous\TorrentScraper;
 interface AdapterInterface
 {
     /**
+     * Construct the adapter with its options.
+     *
+     * @param array $options
+     */
+    public function __construct(array $options);
+
+    /**
      * Set the Guzzle client instance
      *
      * @param \GuzzleHttp\Client $httpClient

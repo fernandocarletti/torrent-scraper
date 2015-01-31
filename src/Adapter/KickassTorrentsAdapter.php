@@ -8,6 +8,11 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class KickassTorrentsAdapter implements AdapterInterface
 {
+    public function __construct(array $options = [])
+    {
+
+    }
+
     public function setHttpClient(\GuzzleHttp\Client $httpClient)
     {
         $this->httpClient = $httpClient;

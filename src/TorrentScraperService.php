@@ -9,6 +9,12 @@ class TorrentScraperService
      */
     protected $adapter;
 
+    public function __construct($adapter, $options = [])
+    {
+        $adapterName = __NAMESPACE__ . '\\Adapter\\' . ucfirst($adapter) . 'Adapter';
+        $this->setAdapter(new $adapterName($options));
+    }
+
     public function setAdapter(AdapterInterface $adapter)
     {
         if (!$adapter->getHttpClient())
