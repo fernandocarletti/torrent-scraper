@@ -6,4 +6,3 @@ php:
   - hhvm
 install:
   - composer install
-  
