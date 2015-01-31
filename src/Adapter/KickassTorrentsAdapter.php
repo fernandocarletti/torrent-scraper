@@ -25,20 +25,20 @@ class KickassTorrentsAdapter implements AdapterInterface
 
     public function search($query)
     {
-        $response = $this->httpClient->get('http://kickass.so/usearch/' . urlencode($query) . '/?field=seeders&sorder=asc');
+        $response = $this->httpClient->get('http://kickass.so/usearch/' . urlencode($query) . '/?field=seeders&sorder=asc&rss=1');
         $crawler = new Crawler((string) $response->getBody());
-        $nodes = $crawler->filter('.torrentname');
+        $items = $crawler->filterXpath('//channel/item');
         $results = [];
 
-        foreach ($nodes as $node) {
+        foreach ($items as $item) {
             $result = new SearchResult();
-            $nameCellCrawler = new Crawler($node->parentNode);
-            $rowCrawler = new Crawler($node->parentNode->parentNode);
-            $result->setName($nameCellCrawler->filter('.cellMainLink')->first()->text());
-            $result->setSeeders((int) $rowCrawler->filter('td')->eq(4)->text());
-            $result->setLeechers((int) $rowCrawler->filter('td')->eq(5)->text());
-            $result->setTorrentUrl($nameCellCrawler->filter('.idownload')->last()->attr('href'));
-            $result->setMagnetUrl($nameCellCrawler->filter('.imagnet')->first()->attr('href'));
+            $itemCrawler = new Crawler($item);
+            $result->setName($itemCrawler->filterXpath('//title')->text());
+            $result->setSeeders((int) $itemCrawler->filterXpath('//torrent:seeds')->text());
+            $result->setLeechers((int) $itemCrawler->filterXpath('//torrent:peers')->text());
+            $result->setTorrentUrl($itemCrawler->filterXpath('//enclosure')->attr('url'));
+            $result->setMagnetUrl($itemCrawler->filterXpath('//torrent:magnetURI')->text());
+
             $results[] = $result;
         }
 

@@ -40,23 +40,23 @@ class KickassTorrentsAdapterTest extends \PHPUnit_Framework_TestCase
         $result1 = new SearchResult();
         $result1->setName('elementaryos beta2 amd64 20130506 iso');
         $result1->setSeeders(48);
-        $result1->setLeechers(2);
+        $result1->setLeechers(50);
         $result1->setTorrentUrl('http://torcache.net/torrent/AC86FCA020C96066862DA1B5FCDF967E2622528D.torrent?title=[kickass.so]elementaryos.beta2.amd64.20130506.iso');
         $result1->setMagnetUrl('magnet:?xt=urn:btih:AC86FCA020C96066862DA1B5FCDF967E2622528D&dn=elementaryos+beta2+amd64+20130506+iso&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337');
 
         $result2 = new SearchResult();
         $result2->setName('elementaryos beta1 i386 20121114 iso');
         $result2->setSeeders(47);
-        $result2->setLeechers(3);
+        $result2->setLeechers(50);
         $result2->setTorrentUrl('http://torcache.net/torrent/B1373BF8253B5462A1FAA36F6F0288152D590841.torrent?title=[kickass.so]elementaryos.beta1.i386.20121114.iso');
         $result2->setMagnetUrl('magnet:?xt=urn:btih:B1373BF8253B5462A1FAA36F6F0288152D590841&dn=elementaryos+beta1+i386+20121114+iso&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337');
 
         $result3 = new SearchResult();
-        $result3->setName('elementaryos-stable-amd64.20130810.iso');
-        $result3->setSeeders(0);
-        $result3->setLeechers(1);
-        $result3->setTorrentUrl('http://torcache.net/torrent/43E60180DEF1CA83A84A6B793C67F726681FB731.torrent?title=[kickass.so]elementaryos.stable.amd64.20130810.iso');
-        $result3->setMagnetUrl('magnet:?xt=urn:btih:43E60180DEF1CA83A84A6B793C67F726681FB731&dn=elementaryos+stable+amd64+20130810+iso&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce');
+        $result3->setName('elementaryos beta2. iso');
+        $result3->setSeeders(45);
+        $result3->setLeechers(47);
+        $result3->setTorrentUrl('http://torcache.net/torrent/94CB5BF6784F9596C56164251D4E5BD76B3A07A2.torrent?title=[kickass.so]elementaryos.beta2.iso');
+        $result3->setMagnetUrl('magnet:?xt=urn:btih:94CB5BF6784F9596C56164251D4E5BD76B3A07A2&dn=elementaryos+beta2+iso&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337');
 
         $expected = [$result1, $result2, $result3];
 
