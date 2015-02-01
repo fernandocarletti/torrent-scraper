@@ -1,5 +1,21 @@
 {
   "name": "xurumelous/torrent-scraper",
+  "description": "Provide an abstraction to seach for torrent files on many websites.",
+  "keywords": [
+    "torrent",
+    "piratebay",
+    "kickass"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/xurumelous/torrent-scraper",
+  "authors": [
+    {
+      "name": "Fernando Carletti",
+      "email": "contato@fernandocarletti.net",
+      "homepage": "http://fernandocarletti.net",
+      "role": "Developer"
+    }
+  ],
   "require": {
     "php": "~5.4",
     "ext-curl": "*",
