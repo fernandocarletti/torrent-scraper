@@ -32,6 +32,6 @@ class TorrentScraperService
 
     public function search($query)
     {
-        $this->adapter->search($query);
+        return $this->adapter->search($query);
     }
 }
