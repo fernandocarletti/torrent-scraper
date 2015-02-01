@@ -23,5 +23,5 @@ foreach ($results as $result) {
 ```
 
 ## Available adapters
-* [kickassTorrents](Kickass.to)
-
+* [kickassTorrents](http://kickass.to)
+* [thePirateBay](http://thepiratebay.se)
