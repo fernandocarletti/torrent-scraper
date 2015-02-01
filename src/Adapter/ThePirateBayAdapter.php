@@ -3,24 +3,17 @@
 namespace Xurumelous\TorrentScraper\Adapter;
 
 use Xurumelous\TorrentScraper\AdapterInterface;
+use Xurumelous\TorrentScraper\HttpClientAware;
 use Xurumelous\TorrentScraper\Entity\SearchResult;
 use Symfony\Component\DomCrawler\Crawler;
 
 class ThePirateBayAdapter implements AdapterInterface
 {
+    use HttpClientAware;
+
     public function __construct(array $options = [])
     {
 
-    }
-
-    public function setHttpClient(\GuzzleHttp\Client $httpClient)
-    {
-        $this->httpClient = $httpClient;
-    }
-
-    public function getHttpClient()
-    {
-        return $this->httpClient;
     }
 
     public function search($query)
