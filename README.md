@@ -11,7 +11,7 @@ This library provides an abstraction to search for torrent files accross some to
 <?php
 
 $scraperService = new \Xurumelous\TorrentScraper\TorrentScrapperService('kickassTorrents');
-$results = $scraperService->search('elemtaryos');
+$results = $scraperService->search('elementaryos');
 
 foreach ($results as $result) {
 	$result->getName();
