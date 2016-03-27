@@ -2,15 +2,26 @@
 
 namespace Xurumelous\TorrentScraper;
 
+use GuzzleHttp\Client;
+
 trait HttpClientAware
 {
+    /**
+     * @var Client
+     */
     protected $httpClient;
 
-    public function setHttpClient(\GuzzleHttp\Client $httpClient)
+    /**
+     * @param Client $httpClient
+     */
+    public function setHttpClient(Client $httpClient)
     {
         $this->httpClient = $httpClient;
     }
 
+    /**
+     * @return Client
+     */
     public function getHttpClient()
     {
         return $this->httpClient;

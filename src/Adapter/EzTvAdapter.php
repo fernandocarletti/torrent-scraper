@@ -2,6 +2,7 @@
 
 namespace Xurumelous\TorrentScraper\Adapter;
 
+use GuzzleHttp\Exception\ClientException;
 use Xurumelous\TorrentScraper\AdapterInterface;
 use Xurumelous\TorrentScraper\HttpClientAware;
 use Xurumelous\TorrentScraper\Entity\SearchResult;
@@ -32,7 +33,12 @@ class EzTvAdapter implements AdapterInterface
      */
     public function search($query)
     {
-        $response = $this->httpClient->get('https://eztv.ag/search/' . $this->transformSearchString($query));
+        try {
+            $response = $this->httpClient->get('https://eztv.ag/search/' . $this->transformSearchString($query));
+        } catch (ClientException $e) {
+            return [];
+        }
+        
         $crawler = new Crawler((string) $response->getBody());
         $items = $crawler->filter('tr.forum_header_border');
         $results = [];

@@ -2,6 +2,7 @@
 
 namespace Xurumelous\TorrentScraper\Adapter;
 
+use GuzzleHttp\Exception\ClientException;
 use Xurumelous\TorrentScraper\AdapterInterface;
 use Xurumelous\TorrentScraper\HttpClientAware;
 use Xurumelous\TorrentScraper\Entity\SearchResult;
@@ -25,7 +26,12 @@ class ThePirateBayAdapter implements AdapterInterface
      */
     public function search($query)
     {
-        $response = $this->httpClient->get('https://thepiratebay.se/search/' . urlencode($query) . '/0/7/0');
+        try {
+            $response = $this->httpClient->get('https://thepiratebay.se/search/' . urlencode($query) . '/0/7/0');
+        } catch (ClientException $e) {
+            return [];
+        }
+        
         $crawler = new Crawler((string) $response->getBody());
         $items = $crawler->filter('#searchResult tr');
         $results = [];

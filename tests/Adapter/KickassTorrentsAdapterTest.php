@@ -2,6 +2,8 @@
 
 namespace Xurumelous\TorrentScraper;
 
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Request;
 use Xurumelous\TorrentScraper\Adapter\KickassTorrentsAdapter;
 use Xurumelous\TorrentScraper\Entity\SearchResult;
 use GuzzleHttp\Client;
@@ -63,6 +65,24 @@ class KickassTorrentsAdapterTest extends \PHPUnit_Framework_TestCase
         $actual = $adapter->search('The Walking Dead S05E08');
 
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testIsHandlingExceptionOnNotFound()
+    {
+        $uri = 'http://kat.cr/usearch/' . urlencode('The Walking Dead S05E08') . '/?field=seeders&sorder=asc&rss=1';
+
+        $client = $this->getMock(Client::class);
+        $client->expects($this->once())
+            ->method('__call')
+            ->with('get', [$uri])
+            ->willThrowException(new ClientException('404 Not Found', new Request('GET', $uri)));
+
+        $adapter = new KickassTorrentsAdapter();
+        $adapter->setHttpClient($client);
+
+        $actual = $adapter->search('The Walking Dead S05E08');
+
+        $this->assertEquals([], $actual);
     }
 
     protected function getMockRawResult()

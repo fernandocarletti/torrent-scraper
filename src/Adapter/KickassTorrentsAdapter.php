@@ -25,19 +25,24 @@ class KickassTorrentsAdapter implements AdapterInterface
      */
     public function search($query)
     {
-        $response = $this->httpClient->get('http://kat.cr/usearch/' . urlencode($query) . '/?field=seeders&sorder=asc&rss=1');
+        try {
+            $response = $this->httpClient->get('http://kat.cr/usearch/' . urlencode($query) . '/?field=seeders&sorder=asc&rss=1');
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            return [];
+        }
+        
         $crawler = new Crawler((string) $response->getBody());
-        $items = $crawler->filterXpath('//channel/item');
+        $items = $crawler->filterXPath('//channel/item');
         $results = [];
 
         foreach ($items as $item) {
             $result = new SearchResult();
             $itemCrawler = new Crawler($item);
-            $result->setName($itemCrawler->filterXpath('//title')->text());
-            $result->setSeeders((int) $itemCrawler->filterXpath('//torrent:seeds')->text());
-            $result->setLeechers((int) $itemCrawler->filterXpath('//torrent:peers')->text());
-            $result->setTorrentUrl($itemCrawler->filterXpath('//enclosure')->attr('url'));
-            $result->setMagnetUrl($itemCrawler->filterXpath('//torrent:magnetURI')->text());
+            $result->setName($itemCrawler->filterXPath('//title')->text());
+            $result->setSeeders((int) $itemCrawler->filterXPath('//torrent:seeds')->text());
+            $result->setLeechers((int) $itemCrawler->filterXPath('//torrent:peers')->text());
+            $result->setTorrentUrl($itemCrawler->filterXPath('//enclosure')->attr('url'));
+            $result->setMagnetUrl($itemCrawler->filterXPath('//torrent:magnetURI')->text());
 
             $results[] = $result;
         }
