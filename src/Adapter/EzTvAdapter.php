@@ -19,9 +19,11 @@ class EzTvAdapter implements AdapterInterface
     /**
      * @param $options array
      */
-    public function __construct(array $options = ['seeders' => 1, 'leechers' => 1])
+    public function __construct(array $options = [])
     {
-        $this->options = $options;
+        $defaults = ['seeders' => 1, 'leechers' => 1];
+
+        $this->options = array_merge($defaults, $options);
     }
 
     /**
