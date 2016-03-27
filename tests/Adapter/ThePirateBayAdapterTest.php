@@ -73,4 +73,19 @@ class ThePirateBayAdapterTest extends \PHPUnit_Framework_TestCase
 
         return $this->rawResultCache;
     }
+
+    public function testFunctional()
+    {
+        $adapter = new ThePirateBayAdapter();
+        $adapter->setHttpClient(new Client());
+
+        $actual = $adapter->search('Debian');
+
+        $this->assertTrue(count($actual) > 0);
+        $this->assertNotEmpty($actual[0]->getName());
+        $this->assertNotNull($actual[0]->getSeeders());
+        $this->assertNotNull($actual[0]->getLeechers());
+        $this->assertNull($actual[0]->getTorrentUrl());
+        $this->assertRegExp('/^magnet:.*$/', $actual[0]->getMagnetUrl());
+    }
 }
