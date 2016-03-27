@@ -26,11 +26,11 @@ class EzTvAdapter implements AdapterInterface
 
     /**
      * @param string $query
-     * @return array
+     * @return SearchResult[]
      */
     public function search($query)
     {
-        $response = $this->httpClient->get('http://kickass.so/usearch/' . $this->transformSearchString($query) . '/?field=seeders&sorder=asc&rss=1');
+        $response = $this->httpClient->get('https://eztv.ag/search/' . $this->transformSearchString($query));
         $crawler = new Crawler((string) $response->getBody());
         $items = $crawler->filter('tr.forum_header_border');
         $results = [];
@@ -41,8 +41,16 @@ class EzTvAdapter implements AdapterInterface
             $result->setName(trim($itemCrawler->filter('td')->eq(1)->text()));
             $result->setSeeders($this->options['seeders']);
             $result->setLeechers($this->options['leechers']);
-            $result->setTorrentUrl($itemCrawler->filter('a.download_1')->eq(0)->attr('href'));
-            $result->setMagnetUrl($itemCrawler->filter('a.magnet')->eq(0)->attr('href'));
+
+            $node = $itemCrawler->filter('a.download_1');
+            if ($node->count() > 0) {
+                $result->setTorrentUrl($node->eq(0)->attr('href'));
+            }
+
+            $node = $itemCrawler->filter('a.magnet');
+            if ($node->count() > 0) {
+                $result->setMagnetUrl($node->eq(0)->attr('href'));
+            }
 
             $results[] = $result;
         }

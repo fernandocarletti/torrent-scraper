@@ -11,14 +11,21 @@ class KickassTorrentsAdapter implements AdapterInterface
 {
     use HttpClientAware;
 
+    /**
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
 
     }
 
+    /**
+     * @param string $query
+     * @return SearchResult[]
+     */
     public function search($query)
     {
-        $response = $this->httpClient->get('http://kickass.so/usearch/' . urlencode($query) . '/?field=seeders&sorder=asc&rss=1');
+        $response = $this->httpClient->get('http://kat.cr/usearch/' . urlencode($query) . '/?field=seeders&sorder=asc&rss=1');
         $crawler = new Crawler((string) $response->getBody());
         $items = $crawler->filterXpath('//channel/item');
         $results = [];

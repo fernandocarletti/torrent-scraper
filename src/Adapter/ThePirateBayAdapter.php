@@ -11,11 +11,18 @@ class ThePirateBayAdapter implements AdapterInterface
 {
     use HttpClientAware;
 
+    /**
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
 
     }
 
+    /**
+     * @param string $query
+     * @return SearchResult[]
+     */
     public function search($query)
     {
         $response = $this->httpClient->get('https://thepiratebay.se/search/' . urlencode($query) . '/0/7/0');
