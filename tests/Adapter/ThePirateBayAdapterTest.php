@@ -5,7 +5,8 @@ namespace Xurumelous\TorrentScraper;
 use Xurumelous\TorrentScraper\Adapter\ThePirateBayAdapter;
 use Xurumelous\TorrentScraper\Entity\SearchResult;
 use GuzzleHttp\Client;
-use GuzzleHttp\Ring\Client\MockHandler;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\Psr7\Response;
 
 class ThePirateBayAdapterTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,8 +32,7 @@ class ThePirateBayAdapterTest extends \PHPUnit_Framework_TestCase
     public function testIsPerformingSearch()
     {
         $mockHandler = new MockHandler([
-            'status' => 200,
-            'body' => $this->getMockRawResult(),
+            new Response(200, [], $this->getMockRawResult()),
         ]);
         $adapter = new ThePirateBayAdapter();
 
