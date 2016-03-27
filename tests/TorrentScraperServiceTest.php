@@ -8,23 +8,30 @@ class TorrentScraperServiceTest extends \PHPUnit_Framework_TestCase
 {
     public function testIsSettingAndGettingTheAdapter()
     {
-        $service = new TorrentScraperService('null');
-        $actual = $service->getAdapter();
+        $service = new TorrentScraperService(['null']);
+        $actual = $service->getAdapters();
 
-        $this->assertInstanceOf('\Xurumelous\TorrentScraper\Adapter\NullAdapter', $actual);
+        $this->assertInstanceOf('\Xurumelous\TorrentScraper\Adapter\NullAdapter', $actual[0]);
     }
 
-    public function testIsSearchingInTheAdapter()
+    public function testIsSearchingInTheAdapters()
     {
         $expected = [new SearchResult()];
-        $adapterMock = $this->getMock('Xurumelous\TorrentScraper\AdapterInterface');
-        $adapterMock->expects($this->once())
+        $adapter1 = $this->getMock('Xurumelous\TorrentScraper\AdapterInterface');
+        $adapter1->expects($this->once())
             ->method('search')
             ->with('The Walking Dead S05E08')
             ->willReturn($expected);
 
-        $service = new TorrentScraperService('null');
-        $service->setAdapter($adapterMock);
+        $adapter2 = $this->getMock('Xurumelous\TorrentScraper\AdapterInterface');
+        $adapter2->expects($this->once())
+            ->method('search')
+            ->with('The Walking Dead S05E08')
+            ->willReturn([]);
+
+        $service = new TorrentScraperService([]);
+        $service->addAdapter($adapter1);
+        $service->addAdapter($adapter2);
 
         $actual = $service->search('The Walking Dead S05E08');
 
@@ -38,8 +45,8 @@ class TorrentScraperServiceTest extends \PHPUnit_Framework_TestCase
             ->method('setHttpClient')
             ->with(new \GuzzleHttp\Client());
 
-        $service = new TorrentScraperService('null');
+        $service = new TorrentScraperService([]);
 
-        $service->setAdapter($adapterMock);
+        $service->addAdapter($adapterMock);
     }
 }

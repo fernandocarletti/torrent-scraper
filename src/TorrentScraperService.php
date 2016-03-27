@@ -2,36 +2,60 @@
 
 namespace Xurumelous\TorrentScraper;
 
+use Xurumelous\TorrentScraper\Entity\SearchResult;
+
 class TorrentScraperService
 {
     /**
-     * @var AdapterInterface
+     * @var AdapterInterface[]
      */
-    protected $adapter;
+    protected $adapters;
 
-    public function __construct($adapter, $options = [])
+    /**
+     * @param array $adapters
+     * @param array $options
+     */
+    public function __construct(array $adapters, $options = [])
     {
-        $adapterName = __NAMESPACE__ . '\\Adapter\\' . ucfirst($adapter) . 'Adapter';
-        $this->setAdapter(new $adapterName($options));
+        foreach ($adapters as $adapter) {
+            $adapterName = __NAMESPACE__ . '\\Adapter\\' . ucfirst($adapter) . 'Adapter';
+            $this->addAdapter(new $adapterName($options));
+        }
     }
 
-    public function setAdapter(AdapterInterface $adapter)
+    /**
+     * @param AdapterInterface $adapter
+     */
+    public function addAdapter(AdapterInterface $adapter)
     {
         if (!$adapter->getHttpClient())
         {
             $adapter->setHttpClient(new \GuzzleHttp\Client());
         }
 
-        $this->adapter = $adapter;
+        $this->adapters[] = $adapter;
     }
 
-    public function getAdapter()
+    /**
+     * @return AdapterInterface[]
+     */
+    public function getAdapters()
     {
-        return $this->adapter;
+        return $this->adapters;
     }
 
+    /**
+     * @param string $query
+     * @return SearchResult[]
+     */
     public function search($query)
     {
-        return $this->adapter->search($query);
+        $results = [];
+
+        foreach ($this->adapters as $adapter) {
+            $results = array_merge($adapter->search($query), $results);
+        }
+
+        return $results;
     }
 }
