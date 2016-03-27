@@ -10,7 +10,7 @@ This library provides an abstraction to search for torrent files accross some to
 ```php
 <?php
 
-$scraperService = new \Xurumelous\TorrentScraper\TorrentScrapperService('kickassTorrents');
+$scraperService = new \Xurumelous\TorrentScraper\TorrentScrapperService(['ezTv', 'kickassTorrents']);
 $results = $scraperService->search('elementaryos');
 
 foreach ($results as $result) {
@@ -23,5 +23,6 @@ foreach ($results as $result) {
 ```
 
 ## Available adapters
+* [ezTv](https://eztv.ag/)
 * [kickassTorrents](http://kickass.to)
 * [thePirateBay](http://thepiratebay.se)
