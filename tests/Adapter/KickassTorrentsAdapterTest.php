@@ -53,7 +53,7 @@ class KickassTorrentsAdapterTest extends \PHPUnit_Framework_TestCase
 
         $expected = [$result1, $result2];
 
-        $actual = $adapter->search('The Walking Dead S05E08');
+        $actual = $adapter->search('Debian');
 
         $this->assertEquals($expected, $actual);
     }

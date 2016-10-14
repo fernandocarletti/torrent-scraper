@@ -47,10 +47,16 @@ class KickassTorrentsAdapter implements AdapterInterface
 
             $itemCrawler = new Crawler($item);
 
+            $name = $itemCrawler->filter('.cellMainLink')->text();
+
+            if (!stristr($name, $query)) {
+                continue;
+            }
+
             $data = json_decode(str_replace("'", '"', $itemCrawler->filter('div[data-sc-params]')->attr('data-sc-params')));
 
             $result = new SearchResult();
-            $result->setName($itemCrawler->filter('.cellMainLink')->text());
+            $result->setName($name);
             $result->setSeeders((int) $itemCrawler->filter('td:nth-child(5)')->text());
             $result->setLeechers((int) $itemCrawler->filter('td:nth-child(6)')->text());
             $result->setMagnetUrl($data->magnet);
