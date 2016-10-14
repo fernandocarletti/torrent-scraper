@@ -40,27 +40,18 @@ class KickassTorrentsAdapterTest extends \PHPUnit_Framework_TestCase
 
         $adapter->setHttpClient(new Client(['handler' => $mockHandler]));
         $result1 = new SearchResult();
-        $result1->setName('elementaryos beta2 amd64 20130506 iso');
-        $result1->setSeeders(48);
-        $result1->setLeechers(50);
-        $result1->setTorrentUrl('http://torcache.net/torrent/AC86FCA020C96066862DA1B5FCDF967E2622528D.torrent?title=[kickass.so]elementaryos.beta2.amd64.20130506.iso');
-        $result1->setMagnetUrl('magnet:?xt=urn:btih:AC86FCA020C96066862DA1B5FCDF967E2622528D&dn=elementaryos+beta2+amd64+20130506+iso&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337');
+        $result1->setName('Ubuntu Linux Toolbox 1000+ Commands for Ubuntu and Debian Power Users by Christopher Negus');
+        $result1->setSeeders(30);
+        $result1->setLeechers(2);
+        $result1->setMagnetUrl('magnet:?xt=urn:btih:D2AA08AB08325A1D9B62EA9EB7F4585148101A00&dn=ubuntu+linux+toolbox+1000+commands+for+ubuntu+and+debian+power+users+by+christopher+negus&tr=udp%3A%2F%2Ftracker.publicbt.com%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce');
 
         $result2 = new SearchResult();
-        $result2->setName('elementaryos beta1 i386 20121114 iso');
-        $result2->setSeeders(47);
-        $result2->setLeechers(50);
-        $result2->setTorrentUrl('http://torcache.net/torrent/B1373BF8253B5462A1FAA36F6F0288152D590841.torrent?title=[kickass.so]elementaryos.beta1.i386.20121114.iso');
-        $result2->setMagnetUrl('magnet:?xt=urn:btih:B1373BF8253B5462A1FAA36F6F0288152D590841&dn=elementaryos+beta1+i386+20121114+iso&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337');
+        $result2->setName('Debian 7- System Administration Best Practices, 2013 [PDF]~StormRG~');
+        $result2->setSeeders(12);
+        $result2->setLeechers(1);
+        $result2->setMagnetUrl('magnet:?xt=urn:btih:17A41CF831D788317A6F6E776943BD7711E6866D&dn=debian+7+system+administration+best+practices+2013+pdf+stormrg&tr=udp%3A%2F%2Ftracker.publicbt.com%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce');
 
-        $result3 = new SearchResult();
-        $result3->setName('elementaryos beta2. iso');
-        $result3->setSeeders(45);
-        $result3->setLeechers(47);
-        $result3->setTorrentUrl('http://torcache.net/torrent/94CB5BF6784F9596C56164251D4E5BD76B3A07A2.torrent?title=[kickass.so]elementaryos.beta2.iso');
-        $result3->setMagnetUrl('magnet:?xt=urn:btih:94CB5BF6784F9596C56164251D4E5BD76B3A07A2&dn=elementaryos+beta2+iso&tr=udp%3A%2F%2Ffr33domtracker.h33t.com%3A3310%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337');
-
-        $expected = [$result1, $result2, $result3];
+        $expected = [$result1, $result2];
 
         $actual = $adapter->search('The Walking Dead S05E08');
 
@@ -69,7 +60,7 @@ class KickassTorrentsAdapterTest extends \PHPUnit_Framework_TestCase
 
     public function testIsHandlingExceptionOnNotFound()
     {
-        $uri = 'http://kat.cr/usearch/' . urlencode('The Walking Dead S05E08') . '/?field=seeders&sorder=asc&rss=1';
+        $uri = 'http://kickasstorrents.to/usearch/' . urlencode('The Walking Dead S05E08') . '/';
 
         $client = $this->getMock(Client::class);
         $client->expects($this->once())
@@ -105,7 +96,6 @@ class KickassTorrentsAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($actual[0]->getName());
         $this->assertNotNull($actual[0]->getSeeders());
         $this->assertNotNull($actual[0]->getLeechers());
-        $this->assertRegExp('/^http.*\.torrent(\?.*)?$/', $actual[0]->getTorrentUrl());
         $this->assertRegExp('/^magnet:.*$/', $actual[0]->getMagnetUrl());
     }
 }

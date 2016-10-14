@@ -26,23 +26,34 @@ class KickassTorrentsAdapter implements AdapterInterface
     public function search($query)
     {
         try {
-            $response = $this->httpClient->get('http://kat.cr/usearch/' . urlencode($query) . '/?field=seeders&sorder=asc&rss=1');
+            $response = $this->httpClient->get('http://kickasstorrents.to/usearch/' . urlencode($query) . '/');
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             return [];
         }
-        
+
         $crawler = new Crawler((string) $response->getBody());
-        $items = $crawler->filterXPath('//channel/item');
+        $items = $crawler->filter('#mainSearchTable tr');
         $results = [];
 
+        $i = 0;
+
         foreach ($items as $item) {
-            $result = new SearchResult();
+            // Ignores advertisement and header
+            if ($i < 2) {
+                $i ++;
+
+                continue;
+            }
+
             $itemCrawler = new Crawler($item);
-            $result->setName($itemCrawler->filterXPath('//title')->text());
-            $result->setSeeders((int) $itemCrawler->filterXPath('//torrent:seeds')->text());
-            $result->setLeechers((int) $itemCrawler->filterXPath('//torrent:peers')->text());
-            $result->setTorrentUrl($itemCrawler->filterXPath('//enclosure')->attr('url'));
-            $result->setMagnetUrl($itemCrawler->filterXPath('//torrent:magnetURI')->text());
+
+            $data = json_decode(str_replace("'", '"', $itemCrawler->filter('div[data-sc-params]')->attr('data-sc-params')));
+
+            $result = new SearchResult();
+            $result->setName($itemCrawler->filter('.cellMainLink')->text());
+            $result->setSeeders((int) $itemCrawler->filter('td:nth-child(5)')->text());
+            $result->setLeechers((int) $itemCrawler->filter('td:nth-child(6)')->text());
+            $result->setMagnetUrl($data->magnet);
 
             $results[] = $result;
         }
