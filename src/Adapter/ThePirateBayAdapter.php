@@ -31,7 +31,7 @@ class ThePirateBayAdapter implements AdapterInterface
         } catch (ClientException $e) {
             return [];
         }
-        
+
         $crawler = new Crawler((string) $response->getBody());
         $items = $crawler->filter('#searchResult tr');
         $results = [];
@@ -50,6 +50,13 @@ class ThePirateBayAdapter implements AdapterInterface
             $result->setSeeders((int) $itemCrawler->filter('td')->eq(2)->text());
             $result->setLeechers((int) $itemCrawler->filter('td')->eq(3)->text());
             $result->setMagnetUrl($itemCrawler->filterXpath('//tr/td/a')->attr('href'));
+            $uploader = null;
+            try {
+               $uploader = $itemCrawler->filter('.detDesc a')->text();
+            } catch (\InvalidArgumentException $e) {
+                // Handle the current node list is empty..
+            }
+            $result->setUploader($uploader);
 
             $results[] = $result;
         }

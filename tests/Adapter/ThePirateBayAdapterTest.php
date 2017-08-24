@@ -41,6 +41,7 @@ class ThePirateBayAdapterTest extends \PHPUnit_Framework_TestCase
         $adapter->setHttpClient(new Client(['handler' => $mockHandler]));
         $result1 = new SearchResult();
         $result1->setName('elementaryos-beta2-i386.20130506.iso');
+        $result1->setUploader('ixcoder');
         $result1->setSeeders(1);
         $result1->setLeechers(0);
         $result1->setTorrentUrl(null);
@@ -48,6 +49,7 @@ class ThePirateBayAdapterTest extends \PHPUnit_Framework_TestCase
 
         $result2 = new SearchResult();
         $result2->setName('elementaryos-beta2-amd64.20130506.iso');
+        $result2->setUploader('ixcoder');
         $result2->setSeeders(1);
         $result2->setLeechers(0);
         $result2->setTorrentUrl(null);
@@ -55,6 +57,7 @@ class ThePirateBayAdapterTest extends \PHPUnit_Framework_TestCase
 
         $result3 = new SearchResult();
         $result3->setName('ElementaryOS 64-bit 20130810');
+        $result3->setUploader(null);
         $result3->setSeeders(1);
         $result3->setLeechers(0);
         $result3->setTorrentUrl(null);

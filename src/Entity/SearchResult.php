@@ -30,6 +30,11 @@ class SearchResult
     protected $magnetUrl;
 
     /**
+     * @var string
+     */
+    protected $uploader;
+
+    /**
      * @param string $name
      */
     public function setName($name)
@@ -107,5 +112,21 @@ class SearchResult
     public function getMagnetUrl()
     {
         return $this->magnetUrl;
+    }
+
+    /**
+     * @param string $uploader
+     */
+    public function setUploader($uploader)
+    {
+        $this->uploader = $uploader;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUploader()
+    {
+        return $this->uploader;
     }
 }
