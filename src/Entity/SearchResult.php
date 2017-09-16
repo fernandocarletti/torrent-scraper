@@ -35,6 +35,11 @@ class SearchResult
     protected $uploader;
 
     /**
+     * @var float
+     */
+    protected $size;
+
+    /**
      * @param string $name
      */
     public function setName($name)
@@ -128,5 +133,21 @@ class SearchResult
     public function getUploader()
     {
         return $this->uploader;
+    }
+
+    /**
+     * @param float $size
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSize()
+    {
+        return $this->size;
     }
 }

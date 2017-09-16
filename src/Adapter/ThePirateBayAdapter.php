@@ -58,6 +58,12 @@ class ThePirateBayAdapter implements AdapterInterface
             }
             $result->setUploader($uploader);
 
+            $description = $itemCrawler->filter('.detDesc')->text();
+            $torrentSize = (preg_match('/.*[Size|Tamanho\ de]\ ([0-9]+\.*[0-9]*).*([G|M]iB)/', $description, $matches)) ? $matches[1] : 0;
+            $torrentSizeUnit = (isset($matches[2])) ? $matches[2] : 'MiB';
+            $torrentSizeConvertedToMib = ($torrentSizeUnit === 'GiB') ? $torrentSize * 1024 : $torrentSize;
+            $result->setSize((float) $torrentSizeConvertedToMib);
+
             $results[] = $result;
         }
 

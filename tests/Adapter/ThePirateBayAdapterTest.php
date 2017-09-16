@@ -46,6 +46,7 @@ class ThePirateBayAdapterTest extends \PHPUnit_Framework_TestCase
         $result1->setLeechers(0);
         $result1->setTorrentUrl(null);
         $result1->setMagnetUrl('magnet:?xt=urn:btih:&dn=elementaryos-beta2-i386.20130506.iso&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969');
+        $result1->setSize(648.00);
 
         $result2 = new SearchResult();
         $result2->setName('elementaryos-beta2-amd64.20130506.iso');
@@ -54,6 +55,7 @@ class ThePirateBayAdapterTest extends \PHPUnit_Framework_TestCase
         $result2->setLeechers(0);
         $result2->setTorrentUrl(null);
         $result2->setMagnetUrl('magnet:?xt=urn:btih:&dn=elementaryos-beta2-amd64.20130506.iso&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969');
+        $result2->setSize(680.00);
 
         $result3 = new SearchResult();
         $result3->setName('ElementaryOS 64-bit 20130810');
@@ -62,6 +64,7 @@ class ThePirateBayAdapterTest extends \PHPUnit_Framework_TestCase
         $result3->setLeechers(0);
         $result3->setTorrentUrl(null);
         $result3->setMagnetUrl('magnet:?xt=urn:btih:&dn=ElementaryOS+64-bit+20130810&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969');
+        $result3->setSize(694.00);
 
         $expected = [$result1, $result2, $result3];
 
@@ -110,5 +113,6 @@ class ThePirateBayAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($actual[0]->getLeechers());
         $this->assertNull($actual[0]->getTorrentUrl());
         $this->assertRegExp('/^magnet:.*$/', $actual[0]->getMagnetUrl());
+        $this->assertNotNull($actual[0]->getSize());
     }
 }

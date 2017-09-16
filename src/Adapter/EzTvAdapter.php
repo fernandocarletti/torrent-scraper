@@ -38,7 +38,7 @@ class EzTvAdapter implements AdapterInterface
         } catch (ClientException $e) {
             return [];
         }
-        
+
         $crawler = new Crawler((string) $response->getBody());
         $items = $crawler->filter('tr.forum_header_border');
         $results = [];
@@ -59,6 +59,11 @@ class EzTvAdapter implements AdapterInterface
             if ($node->count() > 0) {
                 $result->setMagnetUrl($node->eq(0)->attr('href'));
             }
+
+            $torrentSize = (preg_match('/([0-9]+\.*[0-9]*)\ ([G|M]B)/', $itemCrawler->filter('td')->eq(3)->text(), $matches)) ? $matches[1] : 0;
+            $torrentSizeUnit = $matches[2];
+            $torrentSizeConvertedToMib = ($torrentSizeUnit === 'GB') ? $torrentSize * 1024 : $torrentSize;
+            $result->setSize((float) $torrentSizeConvertedToMib);
 
             $results[] = $result;
         }
