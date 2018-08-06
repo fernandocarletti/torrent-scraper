@@ -44,12 +44,14 @@ class KickassTorrentsAdapterTest extends \PHPUnit_Framework_TestCase
         $result1->setSeeders(30);
         $result1->setLeechers(2);
         $result1->setMagnetUrl('magnet:?xt=urn:btih:D2AA08AB08325A1D9B62EA9EB7F4585148101A00&dn=ubuntu+linux+toolbox+1000+commands+for+ubuntu+and+debian+power+users+by+christopher+negus&tr=udp%3A%2F%2Ftracker.publicbt.com%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce');
+        $result1->setSize(2.49);
 
         $result2 = new SearchResult();
         $result2->setName('Debian 7- System Administration Best Practices, 2013 [PDF]~StormRG~');
         $result2->setSeeders(12);
         $result2->setLeechers(1);
         $result2->setMagnetUrl('magnet:?xt=urn:btih:17A41CF831D788317A6F6E776943BD7711E6866D&dn=debian+7+system+administration+best+practices+2013+pdf+stormrg&tr=udp%3A%2F%2Ftracker.publicbt.com%2Fannounce&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce');
+        $result2->setSize(1.98);
 
         $expected = [$result1, $result2];
 
@@ -97,5 +99,6 @@ class KickassTorrentsAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($actual[0]->getSeeders());
         $this->assertNotNull($actual[0]->getLeechers());
         $this->assertRegExp('/^magnet:.*$/', $actual[0]->getMagnetUrl());
+        $this->assertNotNull($actual[0]->getSize());
     }
 }

@@ -61,6 +61,11 @@ class KickassTorrentsAdapter implements AdapterInterface
             $result->setLeechers((int) $itemCrawler->filter('td:nth-child(6)')->text());
             $result->setMagnetUrl($data->magnet);
 
+            $torrentSize = (preg_match('/([0-9]+\.*[0-9]*)\ ([G|M]B)/', $itemCrawler->filter('td:nth-child(2)')->text(), $matches)) ? $matches[1] : 0;
+            $torrentSizeUnit = $matches[2];
+            $torrentSizeConvertedToMib = ($torrentSizeUnit === 'GB') ? $torrentSize * 1024 : $torrentSize;
+            $result->setSize((float) $torrentSizeConvertedToMib);
+
             $results[] = $result;
         }
 
