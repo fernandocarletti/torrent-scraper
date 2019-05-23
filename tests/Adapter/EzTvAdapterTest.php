@@ -1,27 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xurumelous\TorrentScraper;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\TestCase;
 use Xurumelous\TorrentScraper\Adapter\EzTvAdapter;
 use Xurumelous\TorrentScraper\Entity\SearchResult;
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\Psr7\Response;
 
-class EzTvBayAdapterTest extends \PHPUnit_Framework_TestCase
+class EzTvBayAdapterTest extends TestCase
 {
     protected $rawResultCache;
 
-    public function testIsImplementingAdapterInterface()
+    public function testIsImplementingAdapterInterface(): void
     {
         $adapter = new EzTvAdapter();
 
         $this->assertInstanceOf('\Xurumelous\TorrentScraper\AdapterInterface', $adapter);
     }
 
-    public function testIsGettingAndSettingHttpClient()
+    public function testIsGettingAndSettingHttpClient(): void
     {
         $adapter = new EzTvAdapter();
 
@@ -31,7 +34,7 @@ class EzTvBayAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\GuzzleHttp\Client', $actual);
     }
 
-    public function testIsTransformingSearchString()
+    public function testIsTransformingSearchString(): void
     {
         $expected = 'marvel-s-agents-of-s-h-i-e-l-d-';
 
@@ -42,7 +45,7 @@ class EzTvBayAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testIsPerformingSearch()
+    public function testIsPerformingSearch(): void
     {
         $mockHandler = new MockHandler([
             new Response(200, [], $this->getMockRawResult()),
@@ -81,11 +84,11 @@ class EzTvBayAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testIsHandlingExceptionOnNotFound()
+    public function testIsHandlingExceptionOnNotFound(): void
     {
         $uri = 'https://eztv.ag/search/the-walking-dead-s05e08';
 
-        $client = $this->getMock(Client::class);
+        $client = $this->getMockBuilder(Client::class)->getMock();
         $client->expects($this->once())
             ->method('__call')
             ->with('get', [$uri])
@@ -99,16 +102,7 @@ class EzTvBayAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([], $actual);
     }
 
-    protected function getMockRawResult()
-    {
-        if (!$this->rawResultCache) {
-            $this->rawResultCache = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'eztv_result.html');
-        }
-
-        return $this->rawResultCache;
-    }
-
-    public function testFunctional()
+    public function testFunctional(): void
     {
         $adapter = new EzTvAdapter(['seeders' => 15, 'leechers' => 20]);
         $adapter->setHttpClient(new Client());
@@ -122,5 +116,14 @@ class EzTvBayAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertRegExp('/^http.*\.torrent(\?.*)?$/', $actual[0]->getTorrentUrl());
         $this->assertRegExp('/^magnet:.*$/', $actual[0]->getMagnetUrl());
         $this->assertNotNull($actual[0]->getSize());
+    }
+
+    protected function getMockRawResult()
+    {
+        if (!$this->rawResultCache) {
+            $this->rawResultCache = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'eztv_result.html');
+        }
+
+        return $this->rawResultCache;
     }
 }

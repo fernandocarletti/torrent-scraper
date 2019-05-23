@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xurumelous\TorrentScraper\Adapter;
 
-use Xurumelous\TorrentScraper\AdapterInterface;
-use Xurumelous\TorrentScraper\HttpClientAware;
-use Xurumelous\TorrentScraper\Entity\SearchResult;
 use Symfony\Component\DomCrawler\Crawler;
+use Xurumelous\TorrentScraper\AdapterInterface;
+use Xurumelous\TorrentScraper\Entity\SearchResult;
+use Xurumelous\TorrentScraper\HttpClientAware;
 
 class KickassTorrentsAdapter implements AdapterInterface
 {
@@ -16,11 +18,11 @@ class KickassTorrentsAdapter implements AdapterInterface
      */
     public function __construct(array $options = [])
     {
-
     }
 
     /**
      * @param string $query
+     *
      * @return SearchResult[]
      */
     public function search($query)
@@ -32,7 +34,7 @@ class KickassTorrentsAdapter implements AdapterInterface
         }
 
         $crawler = new Crawler((string) $response->getBody());
-        $items = $crawler->filter('#mainSearchTable tr');
+        $items = $crawler->filter('table.data.frontPageWidget tr');
         $results = [];
 
         $i = 0;
@@ -40,7 +42,7 @@ class KickassTorrentsAdapter implements AdapterInterface
         foreach ($items as $item) {
             // Ignores advertisement and header
             if ($i < 2) {
-                $i ++;
+                $i++;
 
                 continue;
             }

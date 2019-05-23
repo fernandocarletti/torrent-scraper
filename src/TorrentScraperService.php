@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xurumelous\TorrentScraper;
 
 use Xurumelous\TorrentScraper\Entity\SearchResult;
@@ -26,10 +28,9 @@ class TorrentScraperService
     /**
      * @param AdapterInterface $adapter
      */
-    public function addAdapter(AdapterInterface $adapter)
+    public function addAdapter(AdapterInterface $adapter): void
     {
-        if (!$adapter->getHttpClient())
-        {
+        if (!$adapter->getHttpClient()) {
             $adapter->setHttpClient(new \GuzzleHttp\Client());
         }
 
@@ -46,6 +47,7 @@ class TorrentScraperService
 
     /**
      * @param string $query
+     *
      * @return SearchResult[]
      */
     public function search($query)

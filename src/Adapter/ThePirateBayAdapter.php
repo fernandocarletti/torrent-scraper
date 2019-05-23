@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xurumelous\TorrentScraper\Adapter;
 
 use GuzzleHttp\Exception\ClientException;
-use Xurumelous\TorrentScraper\AdapterInterface;
-use Xurumelous\TorrentScraper\HttpClientAware;
-use Xurumelous\TorrentScraper\Entity\SearchResult;
 use Symfony\Component\DomCrawler\Crawler;
+use Xurumelous\TorrentScraper\AdapterInterface;
+use Xurumelous\TorrentScraper\Entity\SearchResult;
+use Xurumelous\TorrentScraper\HttpClientAware;
 
 class ThePirateBayAdapter implements AdapterInterface
 {
@@ -17,17 +19,17 @@ class ThePirateBayAdapter implements AdapterInterface
      */
     public function __construct(array $options = [])
     {
-
     }
 
     /**
      * @param string $query
+     *
      * @return SearchResult[]
      */
     public function search($query)
     {
         try {
-            $response = $this->httpClient->get('https://thepiratebay.se/search/' . urlencode($query) . '/0/7/0');
+            $response = $this->httpClient->get('https://thepiratebay.org/search/' . urlencode($query) . '/0/7/0');
         } catch (ClientException $e) {
             return [];
         }
@@ -52,7 +54,7 @@ class ThePirateBayAdapter implements AdapterInterface
             $result->setMagnetUrl($itemCrawler->filterXpath('//tr/td/a')->attr('href'));
             $uploader = null;
             try {
-               $uploader = $itemCrawler->filter('.detDesc a')->text();
+                $uploader = $itemCrawler->filter('.detDesc a')->text();
             } catch (\InvalidArgumentException $e) {
                 // Handle the current node list is empty..
             }

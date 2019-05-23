@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xurumelous\TorrentScraper;
 
 use GuzzleHttp\Client;
@@ -14,7 +16,7 @@ trait HttpClientAware
     /**
      * @param Client $httpClient
      */
-    public function setHttpClient(Client $httpClient)
+    public function setHttpClient(Client $httpClient): void
     {
         $this->httpClient = $httpClient;
     }

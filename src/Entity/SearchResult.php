@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xurumelous\TorrentScraper\Entity;
 
 class SearchResult
@@ -42,7 +44,7 @@ class SearchResult
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -58,7 +60,7 @@ class SearchResult
     /**
      * @param int $seeders
      */
-    public function setSeeders($seeders)
+    public function setSeeders($seeders): void
     {
         $this->seeders = $seeders;
     }
@@ -74,7 +76,7 @@ class SearchResult
     /**
      * @param int $leechers
      */
-    public function setLeechers($leechers)
+    public function setLeechers($leechers): void
     {
         $this->leechers = $leechers;
     }
@@ -90,7 +92,7 @@ class SearchResult
     /**
      * @param string $torrentUrl
      */
-    public function setTorrentUrl($torrentUrl)
+    public function setTorrentUrl($torrentUrl): void
     {
         $this->torrentUrl = $torrentUrl;
     }
@@ -106,7 +108,7 @@ class SearchResult
     /**
      * @param string $magnetUrl
      */
-    public function setMagnetUrl($magnetUrl)
+    public function setMagnetUrl($magnetUrl): void
     {
         $this->magnetUrl = $magnetUrl;
     }
@@ -122,7 +124,7 @@ class SearchResult
     /**
      * @param string $uploader
      */
-    public function setUploader($uploader)
+    public function setUploader($uploader): void
     {
         $this->uploader = $uploader;
     }
@@ -138,7 +140,7 @@ class SearchResult
     /**
      * @param float $size
      */
-    public function setSize($size)
+    public function setSize($size): void
     {
         $this->size = $size;
     }

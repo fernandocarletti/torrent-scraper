@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Xurumelous\TorrentScraper\Adapter;
 
 use Xurumelous\TorrentScraper\AdapterInterface;
@@ -10,16 +12,16 @@ class NullAdapter implements AdapterInterface
     {
     }
 
-    public function setHttpClient(\GuzzleHttp\Client $httpClient)
+    public function setHttpClient(\GuzzleHttp\Client $httpClient): void
     {
     }
 
-    public function getHttpClient()
+    public function getHttpClient(): void
     {
     }
 
     public function search($query)
     {
-       return [];
+        return [];
     }
 }
