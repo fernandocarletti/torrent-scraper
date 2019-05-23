@@ -1,7 +1,7 @@
 Torrent Scraper
 ===============
 
-[![Build Status](https://travis-ci.org/xurumelous/torrent-scraper.svg?branch=master)](https://travis-ci.org/xurumelous/torrent-scraper)
+[![Build Status](https://travis-ci.org/fernandocarletti/torrent-scraper.svg?branch=master)](https://travis-ci.org/xurumelous/torrent-scraper)
 
 ## About
 This library provides an abstraction to search for torrent files accross some torrent websites.
