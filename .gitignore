@@ -3,3 +3,4 @@ vendor/
 composer.phar
 phpunit.xml
 .idea
+.php_cs.cache
