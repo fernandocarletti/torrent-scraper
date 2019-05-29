@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14474d7d6235c23305d6a65f9687d4b8",
+    "content-hash": "a916fc34ba79a30cb9ce5fca3b630cb9",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -334,7 +334,7 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v4.2.8",
+            "version": "v4.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
@@ -2112,7 +2112,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5",
+        "php": ">=7.2",
         "ext-curl": "*"
     },
     "platform-dev": []
