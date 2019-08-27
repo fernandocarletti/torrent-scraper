@@ -334,16 +334,16 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v4.2.9",
+            "version": "v4.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "53c97769814c80a84a8403efcf3ae7ae966d53bb"
+                "reference": "cc686552948d627528c0e2e759186dff67c2610e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/53c97769814c80a84a8403efcf3ae7ae966d53bb",
-                "reference": "53c97769814c80a84a8403efcf3ae7ae966d53bb",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/cc686552948d627528c0e2e759186dff67c2610e",
+                "reference": "cc686552948d627528c0e2e759186dff67c2610e",
                 "shasum": ""
             },
             "require": {
@@ -351,7 +351,11 @@
                 "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-mbstring": "~1.0"
             },
+            "conflict": {
+                "masterminds/html5": "<2.6"
+            },
             "require-dev": {
+                "masterminds/html5": "^2.6",
                 "symfony/css-selector": "~3.4|~4.0"
             },
             "suggest": {
@@ -360,7 +364,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.3-dev"
                 }
             },
             "autoload": {
@@ -387,20 +391,20 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2019-02-23T15:17:42+00:00"
+            "time": "2019-08-26T08:26:39+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.11.0",
+            "version": "v1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "82ebae02209c21113908c229e9883c419720738a"
+                "reference": "550ebaac289296ce228a706d0867afc34687e3f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/82ebae02209c21113908c229e9883c419720738a",
-                "reference": "82ebae02209c21113908c229e9883c419720738a",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/550ebaac289296ce228a706d0867afc34687e3f4",
+                "reference": "550ebaac289296ce228a706d0867afc34687e3f4",
                 "shasum": ""
             },
             "require": {
@@ -412,7 +416,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.11-dev"
+                    "dev-master": "1.12-dev"
                 }
             },
             "autoload": {
@@ -429,12 +433,12 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                },
-                {
                     "name": "Gert de Pagter",
                     "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -445,20 +449,20 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2019-02-06T07:57:58+00:00"
+            "time": "2019-08-06T08:03:45+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.11.0",
+            "version": "v1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "fe5e94c604826c35a32fa832f35bd036b6799609"
+                "reference": "b42a2f66e8f1b15ccf25652c3424265923eb4f17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fe5e94c604826c35a32fa832f35bd036b6799609",
-                "reference": "fe5e94c604826c35a32fa832f35bd036b6799609",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/b42a2f66e8f1b15ccf25652c3424265923eb4f17",
+                "reference": "b42a2f66e8f1b15ccf25652c3424265923eb4f17",
                 "shasum": ""
             },
             "require": {
@@ -470,7 +474,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.11-dev"
+                    "dev-master": "1.12-dev"
                 }
             },
             "autoload": {
@@ -504,7 +508,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-02-06T07:57:58+00:00"
+            "time": "2019-08-06T08:03:45+00:00"
         }
     ],
     "packages-dev": [
@@ -650,18 +654,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "email": "sebastian@phpeople.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpeople.de"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
@@ -697,18 +701,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "email": "sebastian@phpeople.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpeople.de"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Library for handling version information and constraints",
@@ -979,8 +983,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
@@ -1030,8 +1034,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -1072,8 +1076,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Simple template engine.",
@@ -1121,8 +1125,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Utility class for timing",
@@ -1250,8 +1254,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "The PHP Unit Testing framework.",
@@ -1824,8 +1828,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
@@ -2047,8 +2051,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
